@@ -63,6 +63,9 @@
             set : function(frag){
                 if(self.options.mode === 'pushState'){
                     frag = (self.options.root) ? (self.options.root + frag) : frag;
+                    if (frag === root.location.pathname.replace(self.options.root, '')) {
+                      return self;
+                    };
                     root.history.pushState({}, null, frag);
                 }else if(root.location){
                     root.location.hash = (self.options.hashBang ? '!' : '') + frag;
